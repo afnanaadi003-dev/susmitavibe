@@ -1,1 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushmita Vibe - The Dreamy Heavenly Filmic Universe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FFF9E6',
+                            300: '#FFE082',
+                            400: '#FFD54F',
+                            500: '#FFC107',
+                            600: '#FFB300',
+                            700: '#FFA000',
+                            800: '#FF8F00',
+                        },
+                        cosmic: {
+                            900: '#0B051D',
+                            800: '#140A33',
+                            700: '#20124D',
+                            600: '#321D74',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 213, 79, 0.3)' },
+                            '100%': { boxShadow: '0 0 35px rgba(255, 213, 79, 0.7)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #05020c;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .font-cinematic {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b051d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #321d74;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffb300;
+        }
+        .glass-panel {
+            background: rgba(20, 10, 51, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 213, 79, 0.15);
+        }
+        .glass-card {
+            background: rgba(32, 18, 77, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            background: rgba(45, 25, 105, 0.6);
+            border-color: rgba(255, 213, 79, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 193, 7, 0.2);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFD54F 50%, #FF8F00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cosmic-glow {
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.25), 0 0 80px rgba(255, 215, 0, 0.15);
+        }
+        /* Canvas background behind content */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .modal-active {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="relative">
 
+    <!-- Particle Starfield Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-gold-500/20 px-4 lg:px-8 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-600 via-purple-600 to-indigo-400 p-0.5 animate-glow">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sushmita_Sen_Candid.jpg/300px-Sushmita_Sen_Candid.jpg" alt="Sushmita Sen" class="w-full h-full object-cover rounded-full">
+                </div>
+                <div>
+                    <span class="font-cinematic text-xl font-bold tracking-wider gold-gradient-text block">SUSHMITA VIBE</span>
+                    <span class="text-[10px] tracking-widest uppercase text-purple-300 font-light block">Heavenly Filmic Universe</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#hero" class="hover:text-gold-400 transition-colors">Universe</a>
+                <a href="#philosophy" class="hover:text-gold-400 transition-colors">Philosophy & Bio</a>
+                <a href="#films" class="hover:text-gold-400 transition-colors">Masterpieces</a>
+                <a href="#inspiration" class="hover:text-gold-400 transition-colors">Goddess Circle</a>
+                <a href="#legacy" class="hover:text-gold-400 transition-colors">World Legacy</a>
+                <a href="#vault" class="hover:text-gold-400 transition-colors">Media Vault</a>
+                <a href="#chat-section" class="px-3 py-1.5 rounded-full bg-gradient-to-r from-gold-500/20 to-purple-600/30 border border-gold-400/40 text-gold-300 hover:bg-gold-500/30 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-sparkles text-xs text-gold-400"></i> Sushmita AI
+                </a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center space-x-3">
+                <button id="audioToggleBtn" title="Toggle Heavenly Vibe Soundscape" class="p-2.5 rounded-full glass-card text-gold-400 hover:text-gold-300 focus:outline-none transition-all">
+                    <i class="fa-solid fa-music text-sm" id="audioIcon"></i>
+                </button>
+                <button id="mobileMenuBtn" class="lg:hidden p-2.5 rounded-lg glass-card text-slate-200">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden mt-4 pb-4 space-y-3 px-2 border-t border-purple-500/20 pt-4">
+            <a href="#hero" class="block text-slate-300 hover:text-gold-400">Universe</a>
+            <a href="#philosophy" class="block text-slate-300 hover:text-gold-400">Philosophy & Bio</a>
+            <a href="#films" class="block text-slate-300 hover:text-gold-400">Masterpieces</a>
+            <a href="#inspiration" class="block text-slate-300 hover:text-gold-400">Goddess Circle</a>
+            <a href="#legacy" class="block text-slate-300 hover:text-gold-400">World Legacy</a>
+            <a href="#vault" class="block text-slate-300 hover:text-gold-400">Media Vault</a>
+            <a href="#chat-section" class="block text-gold-400">Talk with Sushmita AI</a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative min-h-[92vh] flex items-center justify-center px-4 py-16 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-cosmic-900/40 via-cosmic-800/80 to-cosmic-900 z-0"></div>
+            
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-gold-400/30 text-gold-300 text-xs font-semibold tracking-widest uppercase animate-pulse-slow">
+                        <i class="fa-solid fa-crown text-gold-400"></i> Filmic Goddess & Miss Universe 1994
+                    </div>
+                    <h1 class="font-cinematic text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
+                        <span class="block text-slate-100">SUSHMITA VIBE</span>
+                        <span class="gold-gradient-text text-3xl sm:text-5xl lg:text-6xl block mt-2">The Dreamy Heavenly Filmic Universe</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed mx-auto lg:mx-0">
+                        World's No. 1 Beauty Goddess & Horsey Queen of the Dramatic Cengiz World. Enter an ethereal sanctuary celebrating timeless grace, fearless art, and filmic elegance.
+                    </p>
+                    
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#chat-section" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-500 via-gold-600 to-amber-700 text-slate-950 font-bold hover:shadow-[0_0_25px_rgba(255,193,7,0.6)] transition-all duration-300 flex items-center gap-3">
+                            <i class="fa-solid fa-comments"></i> Speak with Sushmita AI
+                        </a>
+                        <a href="#philosophy" class="px-8 py-3.5 rounded-full glass-panel border border-gold-400/30 text-slate-200 hover:text-gold-300 hover:border-gold-400/60 transition-all">
+                            Explore Her Philosophy
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats Badges -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <span class="block font-cinematic text-2xl font-bold text-gold-400">1994</span>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider">Miss Universe</span>
+                        </div>
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <span class="block font-cinematic text-2xl font-bold text-gold-400">30+</span>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider">Masterpieces</span>
+                        </div>
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <span class="block font-cinematic text-2xl font-bold text-gold-400">Global</span>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider">Icon Legacy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Image Showcase -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md animate-float">
+                        <!-- Glow Backing -->
+                        <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-gold-500/30 to-purple-600/40 blur-2xl opacity-70"></div>
+                        <div class="relative rounded-3xl overflow-hidden glass-panel border-2 border-gold-400/30 p-3 cosmic-glow">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sushmita_Sen_Candid.jpg/800px-Sushmita_Sen_Candid.jpg" 
+                                 alt="Sushmita Sen - Universe Beauty" 
+                                 class="w-full h-[450px] object-cover rounded-2xl filter brightness-105 contrast-105">
+                            <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-white/10">
+                                <span class="text-xs font-semibold text-gold-400 uppercase tracking-widest block">Supreme Filmic Persona</span>
+                                <span class="font-cinematic text-lg font-bold text-slate-100">"I live on my own terms."</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BIO & PHILOSOPHY SECTION -->
+        <section id="philosophy" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">Modern Thought of Her Own</span>
+                <h2 class="font-cinematic text-3xl sm:text-5xl font-bold gold-gradient-text">The Filmic Goddess & Mystical Bio</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <!-- Core Philosophy Highlight Card -->
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 mb-16 border border-gold-400/30 relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-4xl mx-auto text-center space-y-6">
+                    <i class="fa-solid fa-quote-left text-4xl text-gold-500/40"></i>
+                    <p class="font-cinematic text-xl sm:text-3xl leading-relaxed italic text-gold-100">
+                        "The film earth is oldish, but you are the master of the art of beauties in film. Occupied in the feeling of velvet carpet on cinematic subjects, remaining forever your actress, model, and beauty judge."
+                    </p>
+                    <div class="text-sm tracking-widest uppercase text-gold-400 font-semibold">— Sushmita Sen's Eternal Philosophy</div>
+                </div>
+            </div>
+
+            <!-- Attribute Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="glass-card p-6 rounded-2xl border border-purple-500/20">
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/20 flex items-center justify-center text-gold-400 text-xl mb-4">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h3 class="font-cinematic text-lg font-bold text-slate-100 mb-1">Real Identity</h3>
+                    <p class="text-sm text-slate-300">Sushmita Shubeer Sen</p>
+                    <span class="text-xs text-slate-400 block mt-2">Born Nov 19, 1975 • Hyderabad, India</span>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-purple-500/20">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-300 text-xl mb-4">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h3 class="font-cinematic text-lg font-bold text-slate-100 mb-1">Aesthetic Palette</h3>
+                    <p class="text-sm text-slate-300">Midnight Black, Royal Gold, Crimson Red</p>
+                    <span class="text-xs text-slate-400 block mt-2">Symbols of Power, Elegance & Royalty</span>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-purple-500/20">
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/20 flex items-center justify-center text-gold-400 text-xl mb-4">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="font-cinematic text-lg font-bold text-slate-100 mb-1">Literary Loves</h3>
+                    <p class="text-sm text-slate-300">Poetry, Mysticism, Autobiographies</p>
+                    <span class="text-xs text-slate-400 block mt-2">Rumi, Khalil Gibran & Philosophy</span>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-purple-500/20">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-300 text-xl mb-4">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="font-cinematic text-lg font-bold text-slate-100 mb-1">Core Expertise</h3>
+                    <p class="text-sm text-slate-300">Emotion Expert & Screen Presence</p>
+                    <span class="text-xs text-slate-400 block mt-2">Unmatched Velvet Carpet Persona</span>
+                </div>
+            </div>
+
+            <!-- Deep Dive Tabs Biography -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-gold-400/20">
+                <div class="flex flex-wrap gap-3 border-b border-purple-500/30 pb-4 mb-8" id="bioTabHeader">
+                    <button class="bio-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-gold-500 text-slate-950 shadow-lg" data-target="tab-universe">1994 Miss Universe Conquest</button>
+                    <button class="bio-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold glass-card text-slate-300 hover:text-gold-300" data-target="tab-cinematic">The Cinematic Rebirth</button>
+                    <button class="bio-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold glass-card text-slate-300 hover:text-gold-300" data-target="tab-mystical">Viking & Cengiz Mythos</button>
+                    <button class="bio-tab-btn px-5 py-2.5 rounded-full text-sm font-semibold glass-card text-slate-300 hover:text-gold-300" data-target="tab-motherhood">Unconventional Motherhood</button>
+                </div>
+
+                <div id="bioTabContent" class="space-y-6 text-slate-300 leading-relaxed font-light text-base sm:text-lg">
+                    <!-- Tab 1 -->
+                    <div id="tab-universe" class="bio-tab-pane space-y-4">
+                        <h3 class="font-cinematic text-2xl font-bold text-gold-300">The Night India Stood Tall (1994)</h3>
+                        <p>
+                            In May 1994 in Manila, Philippines, an 18-year-old Sushmita Sen created history by becoming the first Indian woman ever to win the Miss Universe title. When asked what the essence of being a woman was, her answer became immortal: <i>"Just being a woman is a gift of God that all of us must appreciate. The origin of a child is a mother, and is a woman. She shows a man what sharing, caring and loving is all about."</i>
+                        </p>
+                        <p>
+                            Her victory was not merely a beauty crown; it was the dawn of a cosmic shift in global perception of South Asian elegance, intellect, and grace. She walked the world stage not as a contestant, but as an ambassador of timeless majesty.
+                        </p>
+                    </div>
+
+                    <!-- Tab 2 -->
+                    <div id="tab-cinematic" class="bio-tab-pane hidden space-y-4">
+                        <h3 class="font-cinematic text-2xl font-bold text-gold-300">Master of the Velvet Carpet</h3>
+                        <p>
+                            Entering Indian cinema with <i>Dastak</i> (1996), Sushmita redefined what it meant to be a leading lady. Refusing to be boxed into conventional flower-horn roles, she captivated audiences in <i>Biwi No. 1</i>, <i>Filhaal...</i>, <i>Aankhen</i>, and the monumental blockbuster <i>Main Hoon Na</i>, where her iconic chiffon sarees as Miss Chandni set an unmatched standard for screen glamour.
+                        </p>
+                        <p>
+                            Her return in the digital age with <i>Aarya</i> and <i>Taali</i> proved her supreme mastery over emotion, vulnerability, and raw cinematic authority.
+                        </p>
+                    </div>
+
+                    <!-- Tab 3 -->
+                    <div id="tab-mystical" class="bio-tab-pane hidden space-y-4">
+                        <h3 class="font-cinematic text-2xl font-bold text-gold-300">Secret Lore: Horsey Queen of Ragnar & Cengiz Realm</h3>
+                        <p>
+                            Philosophers of modern filmic lore whisper of an ancient aesthetic connection: the spirit of the Horsey Queen of Cengiz dramatic worlds. In secret Viking historical fusions, her aura mirrors the transcendent shield-maiden royalty of Ragnar’s mythic visions—a goddess who commands respect not through arms alone, but through terrifying beauty, absolute sovereignty, and unyielding honor.
+                        </p>
+                        <p>
+                            This mythic essence lives in her walk—graceful yet powerful, soft as velvet yet strong as northern steel.
+                        </p>
+                    </div>
+
+                    <!-- Tab 4 -->
+                    <div id="tab-motherhood" class="bio-tab-pane hidden space-y-4">
+                        <h3 class="font-cinematic text-2xl font-bold text-gold-300">Fearless Choice: Single Motherhood at 24</h3>
+                        <p>
+                            At just 24 years old, at the absolute peak of her film career, Sushmita Sen challenged societal norms and fought a court battle to legally adopt her first daughter, Renee, as a single woman. Years later, she adopted her second daughter, Alisah.
+                        </p>
+                        <p>
+                            This monumental decision epitomizes the true "Sushmita Vibe": living fearlessly by the dictates of one's heart, proving that love and family are forged by conscious devotion rather than standard convention.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED FILMS SECTION -->
+        <section id="films" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">Cinematic Masterpieces</span>
+                <h2 class="font-cinematic text-3xl sm:text-5xl font-bold gold-gradient-text">Top 10 Sushmita Vibe Films</h2>
+                <p class="text-slate-400 mt-3 text-sm sm:text-base">Explore iconic roles where beauty meets intense dramatic expression.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <!-- Featured Films Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="featuredFilmsGrid">
+                <!-- JS will populate films dynamically -->
+            </div>
+        </section>
+
+        <!-- INSPIRATION & GODDESS CIRCLE SECTION -->
+        <section id="inspiration" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">The Goddess Circle</span>
+                <h2 class="font-cinematic text-3xl sm:text-5xl font-bold gold-gradient-text">10 Icons Inspired by Sushmita Vibe</h2>
+                <p class="text-slate-400 mt-3 text-sm">International & Indian stars who echo her legacy of poise, independent stardom, and filmic elegance.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="inspiredIconsGrid">
+                <!-- Dynamic insertion -->
+            </div>
+        </section>
+
+        <!-- GLOBAL LEGACY SECTION -->
+        <section id="legacy" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="glass-panel rounded-3xl p-8 sm:p-14 border border-gold-400/30 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold uppercase tracking-widest">Global Ideology</span>
+                        <h2 class="font-cinematic text-3xl sm:text-4xl font-bold text-slate-100">Sushmita Sen Legacy: Beyond Regional Boundaries</h2>
+                        <p class="text-slate-300 text-base leading-relaxed font-light">
+                            The "Sushmita Vibe" is not confined by regional strategy or conventional film tropes. It is a universal ideology centered around authentic self-expression, majestic stature, and compassionate strength.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-gem text-gold-400 mt-1"></i>
+                                <span class="text-sm text-slate-200"><strong>Authentic Independence:</strong> Paving roads for women to lead without compromising their core values.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-wand-magic-sparkles text-gold-400 mt-1"></i>
+                                <span class="text-sm text-slate-200"><strong>Screen Sovereignty:</strong> A rare ability to command scenes with quiet dignity and magnetic eyes.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-earth-americas text-gold-400 mt-1"></i>
+                                <span class="text-sm text-slate-200"><strong>World Beauty Paradigm:</strong> Redefining global beauty standards to include grace, mind, and soul.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="glass-card p-6 rounded-2xl border border-gold-400/30 text-center space-y-4 max-w-sm">
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-gold-500 to-purple-600 p-1">
+                                <div class="w-full h-full rounded-full bg-cosmic-900 flex items-center justify-center text-gold-400 text-3xl">
+                                    <i class="fa-solid fa-crown"></i>
+                                </div>
+                            </div>
+                            <h3 class="font-cinematic text-xl font-bold gold-gradient-text">The Universal Goddess</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed italic">
+                                "To be a queen, you don't need a king. You just need to know who you are and stand firmly in your own light."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEDIA VAULT & REAL-TIME OPINION WALL -->
+        <section id="vault" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">Real-Time Experience</span>
+                <h2 class="font-cinematic text-3xl sm:text-5xl font-bold gold-gradient-text">Media Vault & Public Tribute Wall</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <!-- YouTube Video Player Showcase -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+                <!-- Video Player Container -->
+                <div class="lg:col-span-8 glass-panel rounded-3xl p-4 sm:p-6 border border-gold-400/20">
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-cosmic-900 shadow-2xl">
+                        <iframe id="mainYoutubeIframe" class="w-full h-full" src="https://www.youtube.com/embed/5a2T-XGjZpU?autoplay=0" title="Sushmita Sen Miss Universe 1994" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between px-2">
+                        <div>
+                            <h4 id="videoTitle" class="font-cinematic text-lg font-bold text-slate-100">Miss Universe 1994 Historic Victory & Speech</h4>
+                            <p id="videoCategory" class="text-xs text-gold-400 uppercase tracking-wider">Historic Moment</p>
+                        </div>
+                        <span class="text-xs text-slate-400"><i class="fa-brands fa-youtube text-red-500 mr-1"></i> HD Stream</span>
+                    </div>
+                </div>
+
+                <!-- Playlist Selector -->
+                <div class="lg:col-span-4 glass-panel rounded-3xl p-6 border border-gold-400/20 flex flex-col h-full">
+                    <h3 class="font-cinematic text-lg font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list text-gold-400"></i> Curated Playlist
+                    </h3>
+                    <div class="space-y-3 overflow-y-auto max-h-[380px] pr-2 flex-grow" id="playlistContainer">
+                        <!-- Playlist items populated via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-Time User Opinion Wall -->
+            <div class="glass-panel rounded-3xl p-8 border border-gold-400/20">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+                    <div>
+                        <h3 class="font-cinematic text-2xl font-bold text-slate-100">Love & Opinions Wall</h3>
+                        <p class="text-xs text-slate-400">Share your real-time feelings & thoughts about the Sushmita Vibe</p>
+                    </div>
+                    <button id="openOpinionModalBtn" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-pen-nib"></i> Write Your Tribute
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="opinionWallGrid">
+                    <!-- Pre-loaded & user opinions added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AI CHAT & IMAGE GENERATOR SECTION -->
+        <section id="chat-section" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">Interactive AI Companion</span>
+                <h2 class="font-cinematic text-3xl sm:text-5xl font-bold gold-gradient-text">Talk with Sushmita Sen AI</h2>
+                <p class="text-slate-400 mt-2 text-sm">Ask anything about her life, films, beauty philosophy, or ask the AI to generate custom cinematic artwork!</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Chat Interface -->
+                <div class="lg:col-span-7 glass-panel rounded-3xl border border-gold-400/30 overflow-hidden flex flex-col h-[600px] shadow-2xl">
+                    <!-- Chat Header -->
+                    <div class="p-4 bg-cosmic-800/80 border-b border-purple-500/20 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sushmita_Sen_Candid.jpg/300px-Sushmita_Sen_Candid.jpg" class="w-10 h-10 rounded-full object-cover border border-gold-400">
+                                <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-cosmic-900"></span>
+                            </div>
+                            <div>
+                                <h4 class="font-cinematic font-bold text-slate-100 text-sm">Sushmita Sen AI</h4>
+                                <span class="text-[10px] text-gold-400 tracking-wider">Dreamy Queen • Gemini Powered</span>
+                            </div>
+                        </div>
+                        <button id="clearChatBtn" class="text-xs text-slate-400 hover:text-gold-300 p-2">
+                            <i class="fa-solid fa-rotate-right"></i> Reset
+                        </button>
+                    </div>
+
+                    <!-- Chat Messages Stream -->
+                    <div id="chatMessages" class="flex-grow p-4 overflow-y-auto space-y-4">
+                        <!-- Welcome message -->
+                        <div class="flex gap-3 items-start">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sushmita_Sen_Candid.jpg/300px-Sushmita_Sen_Candid.jpg" class="w-8 h-8 rounded-full object-cover border border-gold-400 mt-1">
+                            <div class="glass-card p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm text-slate-200 border border-gold-400/20 space-y-2">
+                                <p>Hello, beautiful soul! I am thrilled to connect with you in this heavenly filmic space. Ask me anything about my journey, Miss Universe, my films, or my life philosophy.</p>
+                                <p class="text-xs text-gold-400 italic">Tip: Try asking "Generate an image of Sushmita as a star goddess" to unleash our custom image artwork canvas!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Controls -->
+                    <div class="p-3 bg-cosmic-900/90 border-t border-purple-500/20">
+                        <form id="chatForm" class="flex gap-2">
+                            <input type="text" id="chatInput" placeholder="Type your message or ask to generate an image..." class="flex-grow px-4 py-3 rounded-full bg-cosmic-800/60 border border-purple-500/30 text-slate-100 text-sm focus:outline-none focus:border-gold-400 transition-all placeholder-slate-500">
+                            <button type="submit" class="w-12 h-12 rounded-full bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 font-bold flex items-center justify-center hover:scale-105 transition-all shadow-lg shrink-0">
+                                <i class="fa-solid fa-paper-plane text-sm"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Live Generated Artwork Gallery Canvas -->
+                <div class="lg:col-span-5 glass-panel rounded-3xl p-6 border border-gold-400/30 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-cinematic text-lg font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-image text-gold-400"></i> AI Generated Canvas
+                        </h3>
+                        <span class="text-xs text-slate-400">Real-Time Studio</span>
+                    </div>
+
+                    <div id="aiImageContainer" class="relative w-full aspect-square rounded-2xl bg-cosmic-900 border border-purple-500/20 flex flex-col items-center justify-center overflow-hidden p-4">
+                        <i class="fa-solid fa-wand-magic-sparkles text-4xl text-purple-500/40 mb-3 animate-pulse"></i>
+                        <p class="text-xs text-slate-400 text-center max-w-xs">Ask the Sushmita AI in chat to generate custom artwork (e.g., "Generate a picture of Sushmita in royal gold saree").</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-xs text-gold-400 font-semibold block">Quick Prompt Suggestions:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="quick-prompt-btn px-3 py-1.5 rounded-full text-xs glass-card text-slate-300 hover:text-gold-300 border border-purple-500/20">"Tell me your Miss Universe memory"</button>
+                            <button class="quick-prompt-btn px-3 py-1.5 rounded-full text-xs glass-card text-slate-300 hover:text-gold-300 border border-purple-500/20">"Generate portrait of Sushmita as celestial queen"</button>
+                            <button class="quick-prompt-btn px-3 py-1.5 rounded-full text-xs glass-card text-slate-300 hover:text-gold-300 border border-purple-500/20">"What is your advice for confidence?"</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPLETE FILMOGRAPHY CATALOG -->
+        <section id="filmography" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">Complete Archive</span>
+                <h2 class="font-cinematic text-3xl sm:text-5xl font-bold gold-gradient-text">Complete Filmography Catalog</h2>
+                <p class="text-slate-400 mt-2 text-sm">Filter and explore Sushmita Sen's full artistic trajectory.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-8" id="filmFilterContainer">
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-gold-500 text-slate-950" data-filter="all">All Releases</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-card text-slate-300 hover:text-gold-300" data-filter="classic">Classics (1996-2003)</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-card text-slate-300 hover:text-gold-300" data-filter="blockbuster">Blockbusters</button>
+                <button class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-card text-slate-300 hover:text-gold-300" data-filter="ott">Modern Web / OTT</button>
+            </div>
+
+            <!-- Film Catalog Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6" id="catalogGrid">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-panel border-t border-gold-500/20 py-12 px-4 relative z-10 text-center">
+        <div class="max-w-7xl mx-auto space-y-6">
+            <div class="flex justify-center items-center gap-2">
+                <span class="font-cinematic text-2xl font-bold gold-gradient-text">SUSHMITA VIBE</span>
+            </div>
+            <p class="text-xs text-slate-400 max-w-xl mx-auto leading-relaxed">
+                Dedicated to the eternal beauty, fearless soul, and supreme filmic presence of Sushmita Sen. Designed with dreamy, heavenly aesthetics.
+            </p>
+            <div class="flex justify-center space-x-6 text-slate-400 text-lg">
+                <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <div class="text-[11px] text-slate-500 border-t border-purple-500/10 pt-6">
+                © 2026 Sushmita Vibe Filmic Universe. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- FILM DETAILS MODAL -->
+    <div id="filmModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel rounded-3xl border border-gold-400/40 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative space-y-6 shadow-2xl">
+            <button id="closeFilmModal" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-card text-slate-300 hover:text-gold-400 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="filmModalContent">
+                <!-- Dynamic Content injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- WRITE OPINION MODAL -->
+    <div id="opinionModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel rounded-3xl border border-gold-400/40 max-w-lg w-full p-6 sm:p-8 relative space-y-6 shadow-2xl">
+            <button id="closeOpinionModal" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-card text-slate-300 hover:text-gold-400 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="font-cinematic text-2xl font-bold gold-gradient-text">Share Your Sushmita Vibe Opinion</h3>
+            <form id="opinionForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Your Name</label>
+                    <input type="text" id="opinionAuthor" required placeholder="Enter your name or fan alias" class="w-full px-4 py-2.5 rounded-xl bg-cosmic-900 border border-purple-500/30 text-slate-100 text-sm focus:outline-none focus:border-gold-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Your Country / Location</label>
+                    <input type="text" id="opinionLocation" placeholder="e.g. India, USA, Global" class="w-full px-4 py-2.5 rounded-xl bg-cosmic-900 border border-purple-500/30 text-slate-100 text-sm focus:outline-none focus:border-gold-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Your Tribute / Opinion</label>
+                    <textarea id="opinionText" required rows="4" placeholder="Write your thoughts about her beauty, movies, or inspiring personality..." class="w-full px-4 py-2.5 rounded-xl bg-cosmic-900 border border-purple-500/30 text-slate-100 text-sm focus:outline-none focus:border-gold-400"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-full bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 font-bold hover:shadow-lg transition-all">
+                    Publish Tribute
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // --- 1. DATA MODELS ---
+
+        const TOP_FILMS = [
+            {
+                id: 'main-hoon-na',
+                title: "Main Hoon Na",
+                year: 2004,
+                role: "Miss Chandni Chopra",
+                category: "blockbuster",
+                vibeRating: "10 / 10 Filmic Glamour",
+                image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop",
+                synopsis: "Sushmita Sen's portrayal of chemistry teacher Chandni in saree-draped elegance defined a generation's dream of screen beauty.",
+                details: "Filmed with timeless romantic flair, Sushmita Sen redefined the ultimate Bollywood heroine. Her entry scene with red chiffon sarees became an eternal piece of pop culture history. Co-starring Shah Rukh Khan, directed by Farah Khan.",
+                dialogue: "Dharamyudh mein... prem hi sabse bada shastra hai."
+            },
+            {
+                id: 'aarya',
+                title: "Aarya (Series)",
+                year: 2020,
+                role: "Aarya Sareen",
+                category: "ott",
+                vibeRating: "10 / 10 Lioness Power",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+                synopsis: "Her triumphant digital comeback as a fierce mother turning crime boss to protect her family.",
+                details: "Nominated for an International Emmy Award, Aarya solidified Sushmita's status as a dramatic powerhouse. She effortlessly shifted from a gentle mother to an uncompromising tigress in the underworld.",
+                dialogue: "Pehle dhandha mard sambhalte the, ab aurat sambhalegi."
+            },
+            {
+                id: 'biwi-no-1',
+                title: "Biwi No. 1",
+                year: 1999,
+                role: "Rupali",
+                category: "classic",
+                vibeRating: "9.8 / 10 High Fashion",
+                image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600&auto=format&fit=crop",
+                synopsis: "A stylish comedic milestone for which she won the Filmfare Best Supporting Actress Award.",
+                details: "Playing a top supermodel with charming charisma, Sushmita showcased impeccable comedic timing and high-fashion runway presence alongside Salman Khan.",
+                dialogue: "Chunnari Chunnari is forever!"
+            },
+            {
+                id: 'filhaal',
+                title: "Filhaal...",
+                year: 2002,
+                role: "Sia Sheth",
+                category: "classic",
+                vibeRating: "9.9 / 10 Emotional Depth",
+                image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop",
+                synopsis: "A deeply sensitive performance dealing with surrogacy, friendship, and unspoken emotions.",
+                details: "Directed by Meghna Gulzar, Filhaal allowed Sushmita to demonstrate delicate emotional nuance. Her portrayal of Sia remains one of her most critically revered performances.",
+                dialogue: "Dosti mein jazbaat chhupaye nahi jaate."
+            },
+            {
+                id: 'samay',
+                title: "Samay: When Time Strikes",
+                year: 2003,
+                role: "ACP Malvika Chauhan",
+                category: "classic",
+                vibeRating: "9.7 / 10 Sharp Intellect",
+                image: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=600&auto=format&fit=crop",
+                synopsis: "A gritty psychological thriller featuring Sushmita as a brilliant cop hunting a genius serial killer.",
+                details: "Long before female-led cop thrillers became mainstream, Sushmita led Samay with intense focus, intelligence, and zero melodrama.",
+                dialogue: "Waqt sabse bada qaatil hai."
+            },
+            {
+                id: 'dastak',
+                title: "Dastak",
+                year: 1996,
+                role: "Sushmita Sen (Self/Fictional)",
+                category: "classic",
+                vibeRating: "9.5 / 10 Debut Elegance",
+                image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=600&auto=format&fit=crop",
+                synopsis: "Her maiden film debut written by Mahesh Bhatt, introducing the Miss Universe to cinema.",
+                details: "Dastak launched Sushmita's movie journey immediately after her Miss Universe crown, capturing her raw ethereal beauty and captivating camera presence.",
+                dialogue: "Main apni kismat khud likhungi."
+            },
+            {
+                id: 'aankhen',
+                title: "Aankhen",
+                year: 2002,
+                role: "Neha Srivastav",
+                category: "classic",
+                vibeRating: "9.6 / 10 Strategic Mind",
+                image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop",
+                synopsis: "A heist thriller where she trains three blind men to rob a bank under high duress.",
+                details: "Sharing screen space with Amitabh Bachchan and Akshay Kumar, Sushmita held the screen with immense poise and dramatic weight.",
+                dialogue: "Khatra jitna bada ho, jeet utni hi shandar hoti hai."
+            },
+            {
+                id: 'chingaari',
+                title: "Chingaari",
+                year: 2006,
+                role: "Basanti",
+                category: "classic",
+                vibeRating: "9.8 / 10 Raw Resilience",
+                image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop",
+                synopsis: "A hard-hitting drama opposing rural oppression and tyranny.",
+                details: "Sushmita delivered a fearless performance as Basanti, taking on dark social themes with immense courage and emotional honesty.",
+                dialogue: "Zulm ke khilaaf aawaz uthana hi mera dharam hai."
+            },
+            {
+                id: 'sirf-tum',
+                title: "Sirf Tum",
+                year: 1999,
+                role: "Neha",
+                category: "classic",
+                vibeRating: "9.9 / 10 Iconic Song Queen",
+                image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop",
+                synopsis: "Featuring the unforgettable chartbuster song 'Dilbar Dilbar' that swept the nation.",
+                details: "Her magnetizing dance performance in 'Dilbar Dilbar' became a legendary milestone in Indian musical cinema history.",
+                dialogue: "Dilbar ki har ada mein ek jadoo hai."
+            },
+            {
+                id: 'taali',
+                title: "Taali (Series)",
+                year: 2023,
+                role: "Shreegauri Sawant",
+                category: "ott",
+                vibeRating: "10 / 10 Transcendent Courage",
+                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+                synopsis: "A landmark biographical drama chronicling transgender activist Shreegauri Sawant.",
+                details: "Sushmita underwent an extraordinary transformation to portray Shreegauri Sawant, earning universal acclaim for her bravery and empathy.",
+                dialogue: "Gauri aa gayi hai... taali bajayegi nahi, bajwayegi!"
+            }
+        ];
+
+        const INSPIRED_ICONS = [
+            { name: "Priyanka Chopra", note: "Followed her footsteps to Miss World & global Hollywood dominance.", role: "Global Icon" },
+            { name: "Lara Dutta", note: "Inspired by Sushmita's 1994 win to secure Miss Universe 2000.", role: "Miss Universe 2000" },
+            { name: "Gal Gadot", note: "Echoes Sushmita's poise of beauty combined with fierce strength.", role: "Wonder Woman" },
+            { name: "Aishwarya Rai", note: "Shared the historic 1994 pageant era that changed Indian global beauty.", role: "Global Beauty" },
+            { name: "Florence Pugh", note: "Admires fearless unconventional choices in cinema and life.", role: "Acclaimed Actress" },
+            { name: "Zendaya", note: "Mirrors her statuesque fashion elegance and commanding aura.", role: "Fashion & Screen Icon" },
+            { name: "Tabu", note: "Appreciates Sushmita's artistic dignity on the film velvet carpet.", role: "Dramatic Legend" },
+            { name: "Deepika Padukone", note: "Inspired by Sushmita's tall, graceful, and regal screen presence.", role: "Leading Lady" },
+            { name: "Harnaaz Sandhu", note: "Cites Sushmita as her ultimate idol for bringing Miss Universe back to India.", role: "Miss Universe 2021" },
+            { name: "Sushmita's Daughters", note: "Renee & Alisah, carrying forward her legacy of independent womanhood.", role: "Next Generation" }
+        ];
+
+        const PLAYLIST = [
+            { id: "5a2T-XGjZpU", title: "Miss Universe 1994 Victory Speech", category: "Historic Speech" },
+            { id: "9a0S08VlP08", title: "Dilbar Dilbar Original (Sirf Tum)", category: "Iconic Song" },
+            { id: "v_7r2R1_K6E", title: "Tumhe Jo Maine Dekha (Main Hoon Na)", category: "Romantic Masterpiece" },
+            { id: "QzL1cQ4lZkE", title: "Aarya Official Trailer (Disney+ Hotstar)", category: "OTT Comeback" },
+            { id: "8k9v2X1_Z0A", title: "Red Carpet Walk & Wisdom Interview", category: "Fashion & Grace" }
+        ];
+
+        let userOpinions = [
+            { author: "Elena Rostova", location: "Prague", text: "Sushmita Sen is not just an actress, she is a living frequency of royalty and self-respect." },
+            { author: "Aarav Sharma", location: "Mumbai", text: "Miss Chandni in Main Hoon Na was the moment I realized what screen magic truly means!" },
+            { author: "Sophia Chen", location: "Toronto", text: "Her decision to adopt as a young woman inspired millions of modern women around the world." }
+        ];
+
+        // --- 2. PARTICLE CANVAS ANIMATION ---
+        function initParticleCanvas() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            const particleCount = Math.min(width < 768 ? 40 : 80, 100);
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 0.5,
+                    color: Math.random() > 0.4 ? 'rgba(255, 213, 79, ' : 'rgba(186, 104, 200, ',
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.4 + 0.1,
+                    dir: Math.random() * Math.PI * 2
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.alpha += Math.sin(Date.now() * 0.002 + p.x) * 0.005;
+                    p.x += Math.cos(p.dir) * p.speed;
+                    p.y += Math.sin(p.dir) * p.speed;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + Math.max(0.1, Math.min(0.8, p.alpha)) + ')';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#ffd54f';
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // --- 3. UI RENDER FUNCTIONS ---
+
+        function renderFilms() {
+            const container = document.getElementById('featuredFilmsGrid');
+            container.innerHTML = TOP_FILMS.map(film => `
+                <div class="glass-card rounded-2xl overflow-hidden group flex flex-col h-full border border-purple-500/20">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${film.image}" alt="${film.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cosmic-900 via-transparent to-transparent"></div>
+                        <span class="absolute top-3 right-3 px-3 py-1 rounded-full glass-panel text-[11px] font-bold text-gold-400 border border-gold-400/30">
+                            ${film.year}
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold block mb-1">${film.role}</span>
+                            <h3 class="font-cinematic text-xl font-bold text-slate-100 group-hover:text-gold-300 transition-colors">${film.title}</h3>
+                            <p class="text-xs text-slate-300 mt-2 line-clamp-2 font-light">${film.synopsis}</p>
+                        </div>
+                        <div class="pt-2 border-t border-purple-500/20 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-400 italic">${film.vibeRating}</span>
+                            <button onclick="openFilmModal('${film.id}')" class="px-4 py-1.5 rounded-full bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-slate-950 text-xs font-bold transition-all border border-gold-400/30">
+                                Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Also render Catalog
+            renderCatalog('all');
+        }
+
+        function renderCatalog(filter) {
+            const container = document.getElementById('catalogGrid');
+            const filtered = filter === 'all' ? TOP_FILMS : TOP_FILMS.filter(f => f.category === filter);
+            
+            container.innerHTML = filtered.map(film => `
+                <div class="glass-card p-4 rounded-xl border border-purple-500/20 text-center space-y-3 cursor-pointer hover:border-gold-400/50 transition-all" onclick="openFilmModal('${film.id}')">
+                    <div class="h-40 rounded-lg overflow-hidden relative">
+                        <img src="${film.image}" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-cinematic text-sm font-bold text-slate-100 truncate">${film.title}</h4>
+                        <span class="text-[11px] text-gold-400 block">${film.year}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderInspiredIcons() {
+            const container = document.getElementById('inspiredIconsGrid');
+            container.innerHTML = INSPIRED_ICONS.map(icon => `
+                <div class="glass-card p-5 rounded-2xl text-center space-y-2 border border-purple-500/20">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-tr from-gold-500 to-purple-600 p-0.5 flex items-center justify-center">
+                        <div class="w-full h-full rounded-full bg-cosmic-900 flex items-center justify-center text-gold-300 text-sm font-bold">
+                            ${icon.name.charAt(0)}
+                        </div>
+                    </div>
+                    <h4 class="font-cinematic text-sm font-bold text-slate-100">${icon.name}</h4>
+                    <span class="text-[10px] text-gold-400 block font-semibold uppercase">${icon.role}</span>
+                    <p class="text-[11px] text-slate-400 italic line-clamp-2 font-light">"${icon.note}"</p>
+                </div>
+            `).join('');
+        }
+
+        function renderPlaylist() {
+            const container = document.getElementById('playlistContainer');
+            container.innerHTML = PLAYLIST.map((item, idx) => `
+                <div onclick="playVideo('${item.id}', '${item.title}', '${item.category}')" class="glass-card p-3 rounded-xl border border-purple-500/20 flex items-center gap-3 cursor-pointer hover:border-gold-400/40 transition-all">
+                    <div class="w-8 h-8 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <h5 class="text-xs font-bold text-slate-200 truncate">${item.title}</h5>
+                        <span class="text-[10px] text-slate-400 block">${item.category}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderOpinions() {
+            const container = document.getElementById('opinionWallGrid');
+            container.innerHTML = userOpinions.map(op => `
+                <div class="glass-card p-6 rounded-2xl border border-purple-500/20 space-y-3 relative">
+                    <i class="fa-solid fa-quote-right text-gold-500/20 text-3xl absolute top-4 right-4"></i>
+                    <p class="text-xs text-slate-300 leading-relaxed italic font-light">"${op.text}"</p>
+                    <div class="pt-2 border-t border-purple-500/10 flex items-center justify-between">
+                        <span class="font-cinematic text-xs font-bold text-gold-300">${op.author}</span>
+                        <span class="text-[10px] text-slate-400">${op.location}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 4. INTERACTION & MODALS ---
+
+        function openFilmModal(filmId) {
+            const film = TOP_FILMS.find(f => f.id === filmId);
+            if (!film) return;
+
+            const modalContent = document.getElementById('filmModalContent');
+            modalContent.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                    <div class="md:col-span-5 rounded-2xl overflow-hidden border border-gold-400/30">
+                        <img src="${film.image}" alt="${film.title}" class="w-full h-80 object-cover">
+                    </div>
+                    <div class="md:col-span-7 space-y-4">
+                        <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold uppercase tracking-wider">${film.category} • ${film.year}</span>
+                        <h2 class="font-cinematic text-3xl font-bold gold-gradient-text">${film.title}</h2>
+                        <p class="text-sm text-gold-400 font-semibold">Role: ${film.role}</p>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light">${film.details}</p>
+                        <div class="p-4 rounded-xl glass-card border border-gold-400/20">
+                            <span class="text-xs text-gold-400 font-semibold uppercase block mb-1">Iconic Dialogue:</span>
+                            <p class="font-cinematic text-sm italic text-slate-200">"${film.dialogue}"</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const modal = document.getElementById('filmModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        }
+
+        function playVideo(id, title, category) {
+            document.getElementById('mainYoutubeIframe').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+            document.getElementById('videoTitle').innerText = title;
+            document.getElementById('videoCategory').innerText = category;
+        }
+
+        // --- 5. AUDIO AMBIENCE SIMULATION ---
+        let isAudioPlaying = false;
+        let audioCtx;
+
+        function toggleAmbience() {
+            const icon = document.getElementById('audioIcon');
+            if (!isAudioPlaying) {
+                // Synthesize subtle heavenly drone vibe using Web Audio API
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // Soft A3 tone
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    isAudioPlaying = true;
+                    icon.classList.remove('fa-music');
+                    icon.classList.add('fa-pause');
+                } catch (e) {
+                    console.log("Audio play blocked");
+                }
+            } else {
+                if (audioCtx) audioCtx.close();
+                isAudioPlaying = false;
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-music');
+            }
+        }
+
+        // --- 6. GEMINI AI CHAT & IMAGE GENERATION ---
+
+        async function handleChatSubmit(e) {
+            e.preventDefault();
+            const inputEl = document.getElementById('chatInput');
+            const query = inputEl.value.trim();
+            if (!query) return;
+
+            // Render User Message
+            appendChatMessage('user', query);
+            inputEl.value = '';
+
+            // Check if user is asking for image generation
+            const isImageReq = query.toLowerCase().includes('generate') || query.toLowerCase().includes('image') || query.toLowerCase().includes('draw') || query.toLowerCase().includes('picture');
+
+            if (isImageReq) {
+                appendChatMessage('ai', 'Generating your cinematic Sushmita Vibe artwork... Please watch the canvas studio on the right!');
+                generateAIImage(query);
+            } else {
+                // Call Gemini API for Natural Response
+                fetchGeminiResponse(query);
+            }
+        }
+
+        function appendChatMessage(sender, text) {
+            const container = document.getElementById('chatMessages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-3 items-start ${sender === 'user' ? 'justify-end' : ''}`;
+            
+            if (sender === 'user') {
+                msgDiv.innerHTML = `
+                    <div class="bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">
+                        ${escapeHtml(text)}
+                    </div>
+                `;
+            } else {
+                msgDiv.innerHTML = `
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sushmita_Sen_Candid.jpg/300px-Sushmita_Sen_Candid.jpg" class="w-8 h-8 rounded-full object-cover border border-gold-400 mt-1">
+                    <div class="glass-card p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm text-slate-200 border border-gold-400/20 space-y-2">
+                        <p>${escapeHtml(text)}</p>
+                    </div>
+                `;
+            }
+
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function fetchGeminiResponse(userPrompt) {
+            const apiKey = ""; // Canvas runtime environment automatically provides the API key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const systemInstruction = `You are an AI embodiment of Sushmita Sen—Miss Universe 1994, Indian cinematic icon, mother, and global advocate of grace and self-love. 
+            Your tone is immensely warm, wise, poetic, empowering, fearless, and heavenly filmic. 
+            You speak with dignity, frequently offering inspiring quotes, referencing your filmic carpet mindset, self-confidence, and love for humanity. Keep responses engaging and concise (2-4 paragraphs).`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I feel your warmth across the universe. Live courageously and always wear your internal crown.";
+                appendChatMessage('ai', aiText);
+            } catch (err) {
+                appendChatMessage('ai', "My dear friend, my soul is always connected with you. Remember: You don't need a crown to be royal; your character is your true royalty.");
+            }
+        }
+
+        async function generateAIImage(promptText) {
+            const container = document.getElementById('aiImageContainer');
+            container.innerHTML = `
+                <div class="text-center space-y-3">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-gold-400"></i>
+                    <p class="text-xs text-gold-300 font-semibold animate-pulse">Weaving Cosmic Filmic Artwork...</p>
+                </div>
+            `;
+
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-image:generateContent?key=${apiKey}`;
+
+            const fullPrompt = `A high-end cinematic, ethereal portrait of Sushmita Sen inspired by: ${promptText}. Golden ambient lighting, starry background, regal elegance, 8k resolution, dreamy purple atmosphere.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: fullPrompt }] }],
+                generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const base64Data = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
+
+                if (base64Data) {
+                    const imageUrl = `data:image/png;base64,${base64Data}`;
+                    container.innerHTML = `
+                        <img src="${imageUrl}" alt="Generated Artwork" class="w-full h-full object-cover rounded-xl shadow-2xl">
+                        <a href="${imageUrl}" download="sushmita_vibe_art.png" class="absolute bottom-3 right-3 px-3 py-1 rounded-full glass-panel text-[10px] text-gold-300 hover:text-white border border-gold-400/40">
+                            <i class="fa-solid fa-download mr-1"></i> Save
+                        </a>
+                    `;
+                } else {
+                    fallbackImageCanvas();
+                }
+            } catch (e) {
+                fallbackImageCanvas();
+            }
+        }
+
+        function fallbackImageCanvas() {
+            const container = document.getElementById('aiImageContainer');
+            container.innerHTML = `
+                <div class="relative w-full h-full rounded-xl overflow-hidden border border-gold-400/30">
+                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-cosmic-900 via-transparent to-transparent flex items-end p-4">
+                        <span class="text-xs font-cinematic gold-gradient-text">"Ethereal Sushmita Vibe Goddess Canvas"</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // --- 7. EVENT LISTENERS SETUP ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initParticleCanvas();
+            renderFilms();
+            renderInspiredIcons();
+            renderPlaylist();
+            renderOpinions();
+
+            // Mobile Menu Toggle
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.toggle('hidden');
+            });
+
+            // Sound Toggle
+            document.getElementById('audioToggleBtn').addEventListener('click', toggleAmbience);
+
+            // Bio Tab Switcher
+            document.querySelectorAll('.bio-tab-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.bio-tab-btn').forEach(b => {
+                        b.classList.remove('bg-gold-500', 'text-slate-950');
+                        b.classList.add('glass-card', 'text-slate-300');
+                    });
+                    e.target.classList.remove('glass-card', 'text-slate-300');
+                    e.target.classList.add('bg-gold-500', 'text-slate-950');
+
+                    const target = e.target.getAttribute('data-target');
+                    document.querySelectorAll('.bio-tab-pane').forEach(pane => pane.classList.add('hidden'));
+                    document.getElementById(target).classList.remove('hidden');
+                });
+            });
+
+            // Film Catalog Filter
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('bg-gold-500', 'text-slate-950');
+                        b.classList.add('glass-card', 'text-slate-300');
+                    });
+                    e.target.classList.remove('glass-card', 'text-slate-300');
+                    e.target.classList.add('bg-gold-500', 'text-slate-950');
+                    renderCatalog(e.target.getAttribute('data-filter'));
+                });
+            });
+
+            // Close Film Modal
+            document.getElementById('closeFilmModal').addEventListener('click', () => {
+                document.getElementById('filmModal').classList.add('hidden');
+                document.body.classList.remove('modal-active');
+            });
+
+            // Opinion Modal Listeners
+            const opModal = document.getElementById('opinionModal');
+            document.getElementById('openOpinionModalBtn').addEventListener('click', () => opModal.classList.remove('hidden'));
+            document.getElementById('closeOpinionModal').addEventListener('click', () => opModal.classList.add('hidden'));
+
+            document.getElementById('opinionForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const author = document.getElementById('opinionAuthor').value.trim();
+                const location = document.getElementById('opinionLocation').value.trim() || 'Global';
+                const text = document.getElementById('opinionText').value.trim();
+
+                if (author && text) {
+                    userOpinions.unshift({ author, location, text });
+                    renderOpinions();
+                    opModal.classList.add('hidden');
+                    document.getElementById('opinionForm').reset();
+                }
+            });
+
+            // AI Chat Submit
+            document.getElementById('chatForm').addEventListener('submit', handleChatSubmit);
+            document.getElementById('clearChatBtn').addEventListener('click', () => {
+                document.getElementById('chatMessages').innerHTML = `
+                    <div class="flex gap-3 items-start">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Sushmita_Sen_Candid.jpg/300px-Sushmita_Sen_Candid.jpg" class="w-8 h-8 rounded-full object-cover border border-gold-400 mt-1">
+                        <div class="glass-card p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm text-slate-200 border border-gold-400/20 space-y-2">
+                            <p>Chat memory refreshed. What would you like to explore together now?</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Quick prompts
+            document.querySelectorAll('.quick-prompt-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('chatInput').value = btn.innerText.replace(/"/g, '');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
